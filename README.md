@@ -1,6 +1,23 @@
-# Project Name
+# Weekend SQL TO-DO LIST
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+[ ] Build out a to-do list for users to track their tasks
+    [ ] Setup
+        [ ] Create organizational folders/files (modules, routes, public, server, etc.)
+        [ ] Create required files in the above folders (index.html, client.js, server.js, etc)
+        [ ] Put basic required code in each of the files
+        [ ] Connect files together (link, source, require, etc)
+        [ ] npm install express, body-parser, and pg
+        [ ] Make the data base using postico (db name = weekend-to-do-app)
+    [ ] Create a front end experience that allows a user to create a task
+        [ ] Created tasks should be stored in the database (SQL)
+        [ ] Client-side should refresh every time you add a new task
+        [ ] Each task needs to have an option to 'Complete' or 'Delete'
+        [ ] Whether or not a task is complete should also be stored in the database
+        [ ] Deleting a task should remove it both from the front end as well as database
+    [ ] Styling
+        [ ] When a task is completed, change the background color of the task container
+            from one color to another (example gray to green)
+        [ ] The complete option should be 'checked off'
 
 ## Description
 
