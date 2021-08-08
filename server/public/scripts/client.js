@@ -6,6 +6,7 @@ function onReady() {
     // setup click listeners for buttons
     $('#submitBtn').on('click', addTask);
     $(document).on('click', '.deleteBtn', removeTask);
+    $(document).on('check', '.completeBtn', completeTask);
 
     // calling this function on page load will
     // cause the tasks to be rendered to the DOM
@@ -38,9 +39,36 @@ function addTask() {
     });
 } // end addTask()
 
+// removes a task from DOM and database
 function removeTask() {
     console.log('Removed a task');
+
+    let tr = $(this).parents('tr');
+    console.log('tr is', tr);
+    let id = tr.data('id');
+    console.log('id is', id);
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${id}`
+    }).then((res) => {
+        console.log('DELETE /tasks', res);
+        
+        // refresh the data
+        refreshTasks();
+    }).catch((err) => {
+        console.log('DELETE /tasks error', err);
+        alert('DELETE /tasks failed!');
+    });
 } // end removeTask()
+
+// this function runs when the checkbox
+// is checked indicated "marked completed"
+function completeTask() {
+    console.log('Completed a task');
+} // end completeTask()
+
+
 
 // refreshes the tasks
 function refreshTasks() {
@@ -67,14 +95,18 @@ function renderTasks(tasks) {
 
         // for each task, append a new row to our table
         $('#taskList').append(`
-            <tr>
+            <tr data-id="${task.id}" 
+                data-isCompleted="${task.isCompleted}" 
+                class="container"
+            >
                 <td class="taskColumns">
                     ${task.task}
                 </td>
                 <td>${task.due}</td>
                 <td>${completedConversion(task.isCompleted)}</td>
                 <td>
-                    <button class="completeBtn">Complete</button>
+                    <input id="completeBtn" type="checkbox">
+                    <span class="checkmark"></span>
                 </td>
                 <td>
                     <button class="deleteBtn">Delete</button>
