@@ -1,6 +1,6 @@
 # Weekend SQL TO-DO LIST
 
-[ ] Build out a to-do list for users to track their tasks
+[X] Build out a to-do list for users to track their tasks
     [X] Setup
         [X] Create organizational folders/files (modules, routes, public, server, etc.)
         [X] Create required files in the above folders (index.html, client.js, server.js, etc)
@@ -15,13 +15,14 @@
         [X] Each task needs to have an option to 'Complete' or 'Delete'
         [X] Whether or not a task is complete should also be stored in the database
         [X] Deleting a task should remove it both from the front end as well as database
-    [ ] Styling
-        [ ] When a task is completed, change the background color of the task container
+    [X] Styling
+        [X] When a task is completed, change the background color of the task container
             from one color to another (example gray to green)
-        [ ] The complete option should be 'checked off'
+        [X] The complete option should be 'checked off'
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+The problem I solved was being able to create a to-do list for users to input tasks and track them
+to completion.
 
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
