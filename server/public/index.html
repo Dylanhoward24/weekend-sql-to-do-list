@@ -1,25 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- source (link) in the css file for some Harry Styling -->
-    <link rel="stylesheet" href="css/style.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Week 3 Weekend Challenge</title>
 
-    <!-- source in the jQuery and client js files -->
-      <!-- jQuery -->
-      <script src="vendors/jquery.js"></script>
-      <!-- client -->
-      <script src="scripts/client.js"></script>
+        <!-- source (link) in the css file for some Harry Styling -->
+        <link rel="stylesheet" href="css/style.css">
 
-<title>Weekend Challenge: Full Stack To Do App</title>
-
+        <!-- source in the jQuery and client js files -->
+        <!-- jQuery -->
+        <script src="vendors/jquery.js"></script>
+        <!-- client -->
+        <script src="scripts/client.js"></script>
     </head>
 
     <body>
-        <h1>Tasks List</h1>
+        <header>
+            <h1>Dylan's Delightful Task Manager</h1>
+        </header>
+
+        <!-- allow user to input a task -->
+        <section>
+            <h3>Add New Task</h3>
+            <!-- input the task -->
+            <input type="text" id="taskName" placeholder="Task to complete">
+            <!-- input the due date -->
+            <input type="date" id="dueDate" placeholder="Deadline">
+            <!-- submit the task to the database -->
+            <button id="submitBtn">Add to List</button>
+        </section>
+
+        <section>
+                <h3>Tasks List</h3>
+
+                <table>
+
+                    <!-- label the columns -->
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Complete By</th>
+                            <th>Completed</th>
+                            <th>Mark Complete</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+
+                    <!-- where the info will be appended to -->
+                    <tbody id="taskList"></tbody>
+                </table>
+        </section>
+
     </body>
-    
+
 </html>
