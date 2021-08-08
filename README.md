@@ -4,7 +4,7 @@
     [ ] Setup
         [X] Create organizational folders/files (modules, routes, public, server, etc.)
         [X] Create required files in the above folders (index.html, client.js, server.js, etc)
-        [ ] Put basic required code in each of the files
+        [X] Put basic required code in each of the files
         [ ] Connect files together (link, source, require, etc)
         [ ] npm install express, body-parser, and pg
         [ ] Make the data base using postico (db name = weekend-to-do-app)
