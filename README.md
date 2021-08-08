@@ -7,7 +7,7 @@
         [X] Put basic required code in each of the files
         [X] Connect files together (link, source, require, etc)
         [X] npm install express, body-parser, and pg
-        [ ] Make the data base using postico (db name = weekend-to-do-app)
+        [X] Make the data base using postico (db name = weekend_to_do_app)
     [ ] Create a front end experience that allows a user to create a task
         [ ] Created tasks should be stored in the database (SQL)
         [ ] Client-side should refresh every time you add a new task
