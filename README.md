@@ -5,8 +5,8 @@
         [X] Create organizational folders/files (modules, routes, public, server, etc.)
         [X] Create required files in the above folders (index.html, client.js, server.js, etc)
         [X] Put basic required code in each of the files
-        [ ] Connect files together (link, source, require, etc)
-        [ ] npm install express, body-parser, and pg
+        [X] Connect files together (link, source, require, etc)
+        [X] npm install express, body-parser, and pg
         [ ] Make the data base using postico (db name = weekend-to-do-app)
     [ ] Create a front end experience that allows a user to create a task
         [ ] Created tasks should be stored in the database (SQL)
