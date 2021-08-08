@@ -10,13 +10,13 @@ const pool = require('../modules/pool');
 // whenever function refreshTasks() is called
 router.get('/', (req, res) => {
     // mimic postico code to get data from database
-    let queryText = `
+    let sqlQuery = `
         SELECT * FROM "tasks" 
         ORDER BY "due" ASC
     `;
 
     // use SQL through pool.query to get the info back to client
-    pool.query(queryText).then(result => {
+    pool.query(sqlQuery).then(result => {
 
         // result --> information from database
         res.send(result.rows);
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
     console.log('Adding new task', newTask);
 
     // use SQL to add the new task to database
-    let queryText = `
+    let sqlQuery = `
         INSERT INTO "tasks" ("task", "due")
         VALUES ($1, $2)
     `;
@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
         req.body.due,   // $2
     ];
 
-    pool.query(queryText, sqlParams)
+    pool.query(sqlQuery, sqlParams)
         .then(result => {
             res.sendStatus(201); // created
         }).catch(error => {
@@ -60,7 +60,7 @@ router.delete('/:id', (req, res) => {
     console.log('req.params.id is', req.params.id);
     
     // use SQL to delete a task from the database
-    let queryText = `
+    let sqlQuery = `
         DELETE FROM "tasks" 
         WHERE "id" = $1
     `;
@@ -69,12 +69,38 @@ router.delete('/:id', (req, res) => {
         req.params.id   // $1
     ];
 
-    pool.query(queryText, sqlParams)
+    pool.query(sqlQuery, sqlParams)
         .then((dbRes) => {
             res.sendStatus(200); // OK
         }).catch((err) => {
             console.log('DELETE error', err);
         });
 }); // end router.delete
+//
+//--- PUT ENDPOINT ---
+// corresponds with the put request on client-side
+// whenever the completed checkbox is checked
+router.put('/:id', (req, res) => {
+    console.log('id is', req.params.id);
+    console.log('isCompleted is', req.body.isCompleted);
+    
+    const sqlQuery = `
+        UPDATE "tasks"
+        SET "isCompleted" = $1
+        WHERE "id" = $2
+    `;
+    const sqlParams = [
+        req.body.isCompleted,   // $1
+        req.params.id           // $2
+    ];
+
+    pool.query(sqlQuery, sqlParams)
+        .then((dbRes) => {
+            res.sendStatus(200); // OK
+        }).catch((err) => {
+            console.log('UPDATE err', err);
+            res.sendStatus(500);
+        }); 
+}); // end router.put
 
 module.exports = router;

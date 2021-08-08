@@ -6,7 +6,8 @@ function onReady() {
     // setup click listeners for buttons
     $('#submitBtn').on('click', addTask);
     $(document).on('click', '.deleteBtn', removeTask);
-    $(document).on('check', '.completeBtn', completeTask);
+
+    $(document).on('change', '.completeBox', completeTask);
 
     // calling this function on page load will
     // cause the tasks to be rendered to the DOM
@@ -31,6 +32,10 @@ function addTask() {
     }).then((res) => {
         console.log('POST /tasks', res);
         
+        // clear the input fields
+        $('#taskName').val('');
+        $('#dueDate').val('');
+
         // refresh the data since we added new task
         refreshTasks();
     }).catch((err) => {
@@ -65,10 +70,31 @@ function removeTask() {
 // this function runs when the checkbox
 // is checked indicated "marked completed"
 function completeTask() {
-    console.log('Completed a task');
+    console.log('in completeTask');
+
+    let tr = $(this).parents('tr');
+    console.log('tr is', tr);
+    let id = tr.data('id');
+    console.log('id is', id);
+    let isCompleted = tr.data('isCompleted');
+    console.log('isCompleted is', isCompleted);
+    
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${id}`,
+        data: {
+            isCompleted: true
+        }
+    }).then((res) => {
+        console.log('PUT /tasks', res);
+        
+        // refresh the data
+        refreshTasks();
+    }).catch((err) => {
+        console.log('PUT /tasks error', err);
+        alert('PUT /tasks failed!');
+    });
 } // end completeTask()
-
-
 
 // refreshes the tasks
 function refreshTasks() {
@@ -95,18 +121,18 @@ function renderTasks(tasks) {
 
         // for each task, append a new row to our table
         $('#taskList').append(`
-            <tr data-id="${task.id}" 
-                data-isCompleted="${task.isCompleted}" 
-                class="container"
-            >
+            <tr data-id="${task.id}" data-isCompleted="${task.isCompleted}">
                 <td class="taskColumns">
                     ${task.task}
                 </td>
                 <td>${task.due}</td>
-                <td>${completedConversion(task.isCompleted)}</td>
+                <td>${convertComplete(task.isCompleted)}</td>
                 <td>
-                    <input id="completeBtn" type="checkbox">
-                    <span class="checkmark"></span>
+                    <input
+                        class="completeBox" 
+                        type="checkbox"
+                        ${checkIfCompleted(task.isCompleted)}
+                    >
                 </td>
                 <td>
                     <button class="deleteBtn">Delete</button>
@@ -114,15 +140,37 @@ function renderTasks(tasks) {
             </tr>
         `);
     }
+
+    // assign completed tasks rows with a different
+    // class to add green background to in style.css
+    $(function(){
+        $("tr").each(function(){
+          let col_val = $(this).find("td:eq(2)").text();
+          if (col_val == "Yes"){
+            $(this).addClass('complete');
+          } else {
+            $(this).addClass('incomplete');
+          }
+        });
+      });
 } // end renderTasks()
 
 // this function converts the value of
 // isCompleted from a boolean to a string
 // of either 'Yes' or 'No' for appending
-function completedConversion(input) {
+function convertComplete(input) {
     if (input === false) {
         return 'No';
     }else {
         return 'Yes';
     }
-}
+} // end completedConversion()
+
+// this function will keep the checkbox
+// checked after the page re-renders each
+// time a change is made to the datbase
+function checkIfCompleted(input) {
+    if (input === true) {
+        return `checked="checked"`;
+    }
+} // end checkIfCompleted()
