@@ -9,6 +9,7 @@
         [X] npm install express, body-parser, and pg
         [X] Make the data base using postico (db name = weekend_to_do_app)
     [ ] Create a front end experience that allows a user to create a task
+        [X] Create input fields, submit button, and table on index.html
         [ ] Created tasks should be stored in the database (SQL)
         [ ] Client-side should refresh every time you add a new task
         [ ] Each task needs to have an option to 'Complete' or 'Delete'
